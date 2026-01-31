@@ -1,0 +1,14 @@
+{
+  "name": "simple_node_app",
+  "version": "1.0.0",
+  "description": "working on simple CICD project using jenkins and docker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
