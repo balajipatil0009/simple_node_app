@@ -16,6 +16,25 @@ pipeline{
             }
 
         }
+        stage("build and push"){
+            steps{
+                dir("app"){
+                  script{
+                      withCredentials([usernamePassword(
+                        credentialsId:'docker-cred',
+                        passwordVariable:'dockerPass',
+                        usernameVariable:'dockerUser'
+                    )]){
+                        sh 'echo ${dockerPass} | docker login -u ${dockerUser} --password-stdin'
+                        sh 'docker buildx build -t ${dockerUser}/node-01:${BUILD_NUMBER} .' 
+                        sh 'docker push ${dockerUser}/node-01:${BUILD_NUMBER}'
+                        sh 'docker tag ${dockerUser}/node-01:${BUILD_NUMBER} ${dockerUser}/node-01:latest'
+                        sh 'docker push ${dockerUser}/node-01:latest'
+                    }
+                  }
+                }
+            }
+        }
     }
     post{
         always{
