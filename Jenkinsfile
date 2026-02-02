@@ -1,7 +1,7 @@
 pipeline{
     agent any
     tools{
-       nodejs "node20"
+       nodejs "node22"
     }
     stages{
         stage("pull and install deps"){
