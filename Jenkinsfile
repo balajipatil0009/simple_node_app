@@ -9,7 +9,7 @@ pipeline{
              git branch: 'main',
                  credentialsId:"git-cred",
                  url:"https://github.com/balajipatil0009/simple_node_app.git"
-             dir("/app"){
+             dir("app"){
                 sh "npm ci"
                 sh 'ls -la'
              }
