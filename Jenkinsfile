@@ -41,6 +41,7 @@ pipeline{
                     def containerName = "node-01"
                     withCredentials([usernamePassword(
                       credentialsId:'docker-cred',
+                      passwordVariable:'deckerPass',
                       usernameVariable:'dockerUser'
                     )])
 
