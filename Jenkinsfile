@@ -35,6 +35,17 @@ pipeline{
                 }
             }
         }
+        stage("deploy"){
+            steps{
+                script{
+                    def containerName = "node-01"
+
+                    sh 'docker stop ${containerName} || true'
+                    sh 'docker rm ${containerName} || true'
+                    sh 'docker run -d --name ${containerName} -p 3000:3000 ${dockerUser}/node-01:latest'
+                }
+            }
+        }
     }
     post{
         always{
