@@ -43,13 +43,13 @@ pipeline{
                       credentialsId:'docker-cred',
                       passwordVariable:'deckerPass',
                       usernameVariable:'dockerUser'
-                    )])
+                    )]){
 
                     sh 'docker stop ${containerName} || true'
                     sh 'docker rm ${containerName} || true'
                     sh 'docker run -d --name ${containerName} -p 3000:3000 ${dockerUser}/node-01:latest'
                     sh 'docker logout'
-                }
+                    }}
             }
         }
     }
