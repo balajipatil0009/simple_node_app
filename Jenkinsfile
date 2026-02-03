@@ -25,11 +25,11 @@ pipeline{
                         passwordVariable:'dockerPass',
                         usernameVariable:'dockerUser'
                     )]){
-                        sh 'echo ${dockerPass} | docker login -u ${dockerUser} --password-stdin'
-                        sh 'docker buildx build -t ${dockerUser}/node-01:${BUILD_NUMBER} .' 
-                        sh 'docker push ${dockerUser}/node-01:${BUILD_NUMBER}'
-                        sh 'docker tag ${dockerUser}/node-01:${BUILD_NUMBER} ${dockerUser}/node-01:latest'
-                        sh 'docker push ${dockerUser}/node-01:latest'
+                        sh "echo ${dockerPass} | docker login -u ${dockerUser} --password-stdin"
+                        sh "docker buildx build -t ${dockerUser}/node-01:${BUILD_NUMBER} ." 
+                        sh "docker push ${dockerUser}/node-01:${BUILD_NUMBER}"
+                        sh "docker tag ${dockerUser}/node-01:${BUILD_NUMBER} ${dockerUser}/node-01:latest"
+                        sh "docker push ${dockerUser}/node-01:latest"
                     }
                   }
                 }
@@ -45,9 +45,9 @@ pipeline{
                       usernameVariable:'dockerUser'
                     )]){
 
-                    sh 'docker stop ${containerName} || true'
-                    sh 'docker rm ${containerName} || true'
-                    sh 'docker run -d --name ${containerName} -p 3000:3000 ${dockerUser}/node-01:latest'
+                    sh "docker stop ${containerName} || true"
+                    sh "docker rm ${containerName} || true"
+                    sh "docker run -d --name ${containerName} -p 3000:3000 ${dockerUser}/node-01:latest"
                     sh 'docker logout'
                     }}
             }
